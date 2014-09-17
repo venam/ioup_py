@@ -1,0 +1,85 @@
+#:kivy 1.8.0
+
+<TitleBar>:
+	orientation: "horizontal"
+	size_hint_y: 0.08
+	canvas:
+		Color:
+			rgba: 0.35, 0.35, 0.35, 1
+		Rectangle:
+			size: self.size
+			pos: self.pos
+
+	Label:
+		text: "ioup"
+		font_size: '20sp'
+		halign: 'center'
+		size: self.width, self.height
+
+<MainMenu>:
+	orientation: "vertical"
+	margin: 15
+	padding: 20
+	spacing: 15
+	serverKeyBut: serverKeyBut
+	uploadMainBut: uploadMainBut
+	listMainBut: listMainBut
+	Button:
+		id: uploadMainBut
+		text: "Upload"
+	Button:
+		id: listMainBut
+		text: "List"
+	Button:
+		id: serverKeyBut
+		text: "Server Key"
+
+<ServerKey>:
+	orientation: "vertical"
+	margin: 15
+	padding: 20
+	spacing: 10
+	textKey: textKey
+	saveKey: saveKey
+	cancelKey: cancelKey
+	Label:
+		size_hint_y: 0.1
+		text: "Server Key"
+	TextInput:
+		id: textKey
+	BoxLayout:
+		orientation: "vertical"
+		spacing: 10
+		Button:
+			id: saveKey
+			text: "Save"
+		Button:
+			id: cancelKey
+			text: "Cancel"
+
+<uploadDialog>:
+	filechooser: filechooser
+	cancelUploadBut: cancelUploadBut
+	uploadBut: uploadBut
+	BoxLayout:
+		size: root.size
+		pos: root.pos
+		orientation: "vertical"
+		FileChooserListView:
+			id: filechooser
+			dirselect: False
+
+		BoxLayout:
+			size_hint_y: None
+			height: 30
+			Button:
+				id: cancelUploadBut
+				on_release: root.cancel()
+				text: "Cancel"
+
+			Button:
+				id: uploadBut
+				text: "Upload"
+				on_release: root.load(filechooser.path, filechooser.selection)
+
+
